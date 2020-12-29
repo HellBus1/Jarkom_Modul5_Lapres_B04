@@ -49,7 +49,7 @@ route add -net 10.151.83.40 netmask 255.255.255.248 gw 192.168.5.2
 ### (D) Memberikan ip pada subnet **SIDOARJO** dan **GRESIK** secara dinamis menggunakan bantuan DHCP SERVER (selain itu menggunakan ip static)
 
 ```
-nano /etc/dhcp/dhcpd.conf (MOJOKERTO)
+dhcpd.conf pada Mojokerto
 
 subnet 192.168.4.0 netmask 255.255.255.0 {
     range 192.168.4.2 192.168.4.254;
@@ -73,7 +73,7 @@ subnet 10.151.83.40 netmask 255.255.255.248 {
 
 }
 
-service isc-dhcp-server restart (Mojokerto)
+
 
 
 
@@ -81,19 +81,18 @@ service isc-dhcp-server restart (Mojokerto)
 
 
 ---------------------------------
-Cara install relay
+Relay
 
-apt-get install isc-dhcp-relay (BATU, KEDIRI)
+apt-get install isc-dhcp-relay pada Batu dan Kediri
 
 #bakal keluar installernya trus diisi
 IP MOJO, kosong, kosong
 
-service networking restart (GRESIK, SIDOARJO)
 ```
 
 ```
 router-------------
-SURABAYA________________________
+SURABAYA
 
 auto eth0
 iface eth0 inet static
@@ -111,7 +110,7 @@ iface eth2 inet static
 address 192.168.2.1
 netmask 255.255.255.252
 
-BATU_____________________________
+BATU
 
 auto eth0
 iface eth0 inet static
@@ -130,7 +129,7 @@ iface eth2 inet static
 address 10.151.83.41 (server malang)
 netmask 255.255.255.248
 
-KEDIRI_____________________________
+KEDIRI
 
 auto eth0
 iface eth0 inet static
@@ -150,21 +149,17 @@ netmask 255.255.255.248
 
 
 
-client----------------
-
-ip dinamis
 
 server
 
-MALANG____________________
-
+MALANG
 auto eth0
 iface eth0 inet static
 address 10.151.83.42 (ip malang tiap kelompok)
 netmask 255.255.255.248
 gateway  10.151.83.43 (ip malang + 1)
 
-MOJOKERTO________________
+MOJOKERTO
 
 auto eth0
 iface eth0 inet static
@@ -172,16 +167,14 @@ address 10.151.83.43 (ip mojokerto tiap kelompok)
 netmask 255.255.255.248
 gateway 10.151.83.43 (gateway malang)
 
-MADIUN____________________
-
+MADIUN
 auto eth0
 iface eth0 inet static
 address 192.168.1.2
 netmask 255.255.255.248
 gateway 192.168.1.1
 
-PROBOLINGGO____________
-
+PROBOLINGGO
 auto eth0
 iface eth0 inet static
 address 192.168.1.3
@@ -239,14 +232,14 @@ iptables -t nat -A POSTROUTING -p tcp --dport 80 -d 192.168.1.3 -j SNAT --to-sou
 ### (7) Semua paket yang didrop oeh firewall (dalam topologi) tercatat dalam log pada setiap UML yang memiliki aturan drop.
 
 ```
-**di surabaya (gantiin nomer 2):**
+**di surabaya (menimpa no2):**
 
 iptables -N LOGGING
 iptables -A FORWARD -p tcp --dport 22 -d 10.151.83.40/29 -i eth0 -j LOGGING
 iptables -A LOGGING -m limit --limit 2/min -j LOG --log-prefix "PDROP: " --log-level info
 iptables -A LOGGING -j DROP
 
-**di malang mojo (gantiin nomer 3):**
+**di malang mojo (menimpa no3):**
 
 iptables -N LOGGING
 iptables -A INPUT -p icmp -m connlimit --connlimit-above 3 --connlimit-mask 0 -j LOGGING
