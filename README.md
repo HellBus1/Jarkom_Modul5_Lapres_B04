@@ -34,7 +34,7 @@ xterm -T GRESIK -e linux ubd0=GRESIK,jarkom umid=GRESIK eth0=daemon,,,switch6 me
 
 ### (B) Melakukan subnetting dengan VLSM atau CIDR
 
-![cidr](asseT/CIDR.jpg)
+![cidr](asset/CIDR.jpg)
 
 ![pembagian-ip](asset/PEMBAGIANIP.jpg)
 
