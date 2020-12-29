@@ -55,7 +55,7 @@ subnet 192.168.4.0 netmask 255.255.255.0 {
     range 192.168.4.2 192.168.4.254;
     option routers 192.168.4.1;
     option broadcast-address 192.168.4.255;
-    option domain-name-servers 10.151.77.74;
+    option domain-name-servers 10.151.83.42;
     default-lease-time 600;
     max-lease-time 7200;
 }
@@ -64,7 +64,7 @@ subnet 192.168.0.0 netmask 255.255.255.0 {
     range 192.168.0.2 192.168.0.254;
     option routers 192.168.0.1;
     option broadcast-address 192.168.0.255;
-    option domain-name-servers 10.151.77.74;
+    option domain-name-servers 10.151.83.42;
     default-lease-time 600;
     max-lease-time 7200;
 }
